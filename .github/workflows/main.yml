@@ -1,0 +1,28 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+  
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create plugin zip
+        run: |
+          mkdir release
+          zip -r release/custom-site-functions.zip . \
+            -x ".git/*" \
+               ".github/*" \
+               ".gitignore" \
+               "README.md"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: release/custom-site-functions.zip
