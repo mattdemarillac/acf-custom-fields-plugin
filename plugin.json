@@ -1,0 +1,14 @@
+{
+  "name": "Custom Site Functions",
+  "version": "1.0",
+  "download_url": "https://github.com/mattdemarillac/acf-custom-fields-plugin/releases/download/v1.0.0.0/custom-site-functions.zip",
+
+  "homepage": "https://github.com/mattdemarillac",
+
+  "author": "Matt de Marillac",
+  "author_homepage": "https://github.com/mattdemarillac",
+
+  "sections": {
+    "description": "Custom Wordpress functions intended to be used with ACF."
+  }
+}

@@ -1,26 +1,51 @@
-name: Release
-
+name: Release Plugin
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
 
 permissions:
   contents: write
-  
+
 jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Create plugin zip
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+
+        with:
+          php-version: "8.2"
+          tools: composer
+
+      - name: Install Composer dependencies (production)
+        run: |
+          composer install --no-dev --optimize-autoloader --prefer-dist
+
+      - name: Create clean build folder
         run: |
           mkdir release
-          zip -r release/custom-site-functions.zip . \
-            -x ".git/*" \
-               ".github/*" \
-               ".gitignore" \
-               "README.md"
+          rsync -av \
+            custom-site-functions/ \
+            release/custom-site-functions/
+
+      - name: Copy vendor into plugin
+        run: |
+          rsync -av vendor release/custom-site-functions/
+
+      - name: Remove dev-only files
+        run: |
+          rm -f release/custom-site-functions/composer.json
+          rm -f release/custom-site-functions/composer.lock
+
+      - name: Create ZIP
+        run: |
+          cd release
+          zip -r custom-site-functions.zip custom-site-functions
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2

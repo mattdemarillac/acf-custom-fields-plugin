@@ -4,6 +4,18 @@ Plugin Name: Custom Site Functions
 Description: Custom Wordpress functions intended to be used with ACF. By Matthew de Marillac.
 Version: 1.0.0
 */
+require 'plugin-update-checker/plugin-update-checker.php';
+
+use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
+
+$updateChecker = PucFactory::buildUpdateChecker(
+
+    'https://github.com/mattdemarillac/acf-custom-fields-plugin',
+    __FILE__,
+    'custom-site-functions'
+);
+
+$updateChecker->setBranch('main');
 
 if (!defined('ABSPATH')) {
     exit;
