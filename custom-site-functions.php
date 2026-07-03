@@ -18,6 +18,8 @@ $updateChecker = PucFactory::buildUpdateChecker(
 
 $updateChecker->setBranch('main');
 
+$updateChecker->getVcsApi()->enableReleaseAssets('/\.zip($|[?&#])/i');
+
 if (!defined('ABSPATH')) {
     exit;
 }
