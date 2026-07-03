@@ -32,10 +32,17 @@ jobs:
             --exclude='.github' \
             --exclude='.idea' \
             --exclude='release' \
+            --exclude='vendor' \
             --exclude='composer.json' \
             --exclude='composer.lock' \
             ./ \
             release/custom-site-functions/
+
+      - name: Copy plugin-update-checker to plugin root
+        run: |
+          rsync -av \
+            vendor/yahnis-elsts/plugin-update-checker/ \
+            release/custom-site-functions/plugin-update-checker/
 
       - name: Create ZIP
         run: |
