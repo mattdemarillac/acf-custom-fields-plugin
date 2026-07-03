@@ -2,7 +2,7 @@
 /*
 Plugin Name: Custom Site Functions
 Description: Custom Wordpress functions intended to be used with ACF. By Matthew de Marillac.
-Version: 1.0.1
+Version: 1.0.2
 */
 require 'plugin-update-checker/plugin-update-checker.php';
 
