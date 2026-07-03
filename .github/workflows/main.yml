@@ -30,12 +30,12 @@ jobs:
         run: |
           mkdir release
           rsync -av \
-            custom-site-functions/ \
-            release/custom-site-functions/
+            acf-custom-fields-plugin/ \
+            release/acf-custom-fields-plugin/
 
       - name: Copy vendor into plugin
         run: |
-          rsync -av vendor release/custom-site-functions/
+          rsync -av vendor release/acf-custom-fields-plugin/
 
       - name: Remove dev-only files
         run: |
@@ -45,7 +45,7 @@ jobs:
       - name: Create ZIP
         run: |
           cd release
-          zip -r custom-site-functions.zip custom-site-functions
+          zip -r custom-site-functions.zip acf-custom-fields-plugin
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
