@@ -2,7 +2,7 @@
 /*
 Plugin Name: Custom Site Functions
 Description: Custom Wordpress functions intended to be used with ACF. By Matthew de Marillac.
-Version: 1.0.0
+Version: 1.0.1
 */
 require 'plugin-update-checker/plugin-update-checker.php';
 
@@ -12,7 +12,8 @@ $updateChecker = PucFactory::buildUpdateChecker(
 
     'https://github.com/mattdemarillac/acf-custom-fields-plugin',
     __FILE__,
-    'custom-site-functions'
+    'custom-site-functions',
+    24
 );
 
 $updateChecker->setBranch('main');
@@ -62,7 +63,6 @@ add_action('woocommerce_before_checkout_form', function () {
         return;
     }
 
-
     $holiday_notice_text = get_field('holiday_notice', $settings_page_id);
 
     if (!$holiday_notice_text) {
@@ -76,7 +76,6 @@ add_action('woocommerce_before_checkout_form', function () {
         ),
         'error'
     );
-
 });
 
 /**
