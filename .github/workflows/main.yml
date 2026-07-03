@@ -11,13 +11,11 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
-
         with:
           php-version: "8.2"
           tools: composer
@@ -28,24 +26,21 @@ jobs:
 
       - name: Create clean build folder
         run: |
-          mkdir release
+          mkdir -p release/custom-site-functions
           rsync -av \
-            acf-custom-fields-plugin/ \
-            release/acf-custom-fields-plugin/
-
-      - name: Copy vendor into plugin
-        run: |
-          rsync -av vendor release/acf-custom-fields-plugin/
-
-      - name: Remove dev-only files
-        run: |
-          rm -f release/custom-site-functions/composer.json
-          rm -f release/custom-site-functions/composer.lock
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='.idea' \
+            --exclude='release' \
+            --exclude='composer.json' \
+            --exclude='composer.lock' \
+            ./ \
+            release/custom-site-functions/
 
       - name: Create ZIP
         run: |
           cd release
-          zip -r custom-site-functions.zip acf-custom-fields-plugin
+          zip -r custom-site-functions.zip custom-site-functions
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
