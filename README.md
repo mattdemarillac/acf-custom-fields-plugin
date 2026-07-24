@@ -4,6 +4,8 @@
 
 A lightweight WordPress plugin for managing site-specific functionality using ACF.
 
+Has the capacity to automatically update itself from a GitHub repository.
+
 Created by **Matthew de Marillac**.
 
 ---
